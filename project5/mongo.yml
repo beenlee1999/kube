@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mongo-pod
+spec:
+  containers:
+  - name: mongo
+    image: mongo
+    ports:
+    - containerPort: 8888
+      protocol: TCP
+  affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: project
+            topologyKey: kubernetes.io/hostname
+            
